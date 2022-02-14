@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    # use mariadb instead of mysql due to a broader architecture compatibility
+    image: mariadb:10.6.5
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    healthcheck:
+      # checks if db instance is accessible already
+      test: out=$$(mysqladmin ping -h localhost -P 3306 -u root 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
+      interval: 2s
+      timeout: 10s
+      retries: 10
+  api:
+    build: .
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
