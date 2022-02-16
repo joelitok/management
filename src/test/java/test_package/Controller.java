@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import management.controllers.controller_ressource_concept.OrderController;
-import management.controllers.controller_security_concept.LoginController;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,16 +17,15 @@ public class Controller {
     @Autowired
     private OrderController orderController;
 
-    @Autowired
-    private LoginController loginController;
+   
 
     @Test
     public void orderContextLoads() throws Exception {
         assertThat (orderController).isNotNull();
     }
-
+/*
     @Test
     public void loginContextLoads() throws Exception {
         assertThat (loginController).isNotNull();
-    }
+    }*/
 }

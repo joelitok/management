@@ -22,8 +22,10 @@ public class ManagementApplication implements  CommandLineRunner {
 
 	@Autowired
 	private HardwareRepository HardwareRepository;
+	
 	@Autowired
 	private OrderRepository OrderRepository;
+
 	@Autowired
 	private AccountService accountService;
 
