@@ -14,14 +14,15 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
-import management.dao.dao_security_concept.UserRepository;
+
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -35,15 +36,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 
 
+
+
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		
 	http.csrf().disable();
 	http.headers().frameOptions().disable();
 	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	
+/*
+	http.authorizeRequests().antMatchers("/v2/api-docs",
+                                   "/configuration/ui",
+                                   "/swagger-resources/**",
+                                   "/configuration/security",
+                                   "/swagger-ui.html",
+                                   "/webjars/**").permitAll();*/
 
-	
+    http.authorizeRequests().antMatchers("/auth/**", "/v2/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/configuration/**").permitAll();
 	http.authorizeRequests().antMatchers("/login/**","/register/**","/refreshToken").permitAll();
 	//les routes specifiées
 

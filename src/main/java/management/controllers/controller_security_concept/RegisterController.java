@@ -20,9 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import management.entities.entities_security_concept.AppUser;
 import management.entities.entities_security_concept.RegisterUser;
 import management.security.SecurityConstants;
@@ -61,12 +62,12 @@ public class RegisterController {
       }
 
 
-      
 
 
 
 
-      //Rafrechir le token de l'utilisateur    
+
+//Rafrechir le token de l'utilisateur    
 @GetMapping(path="/refreshToken")
 public <JWTVerifier> void refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception{
 String auhToken =request.getHeader(SecurityConstants.HEADER_STRING);
